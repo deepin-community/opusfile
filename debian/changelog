@@ -1,0 +1,84 @@
+opusfile (0.9+20170913-1.1) unstable; urgency=medium
+
+  * Non maintainer upload by the Reproducible Builds team.
+  * No source change upload to rebuild on buildd with .buildinfo files.
+
+ -- Holger Levsen <holger@debian.org>  Sun, 27 Dec 2020 16:23:49 +0100
+
+opusfile (0.9+20170913-1) unstable; urgency=medium
+
+  * Fix an invalid free with tag handling.
+  * Improve handling of corrupt streams.
+  * Improve performance on streams with many chain segments.
+  * Improve TLS host validation.
+  * Align op_raw_total to work better with op_raw_seek.
+  * Includes the fix for an out-of-bounds read in serialno matching logic
+    (a bug which was introduced after the 0.8 release but found and fixed
+    after 0.9 was tagged).
+
+ -- Ron Lee <ron@debian.org>  Thu, 28 Sep 2017 02:56:19 +0930
+
+opusfile (0.8-1) unstable; urgency=medium
+
+  * Fix skip logic for multiplexed non-Opus data.
+  * Fix issues with tag parsing introduced in 0.7.
+  * Add support for OpenSSL 1.1.x.  Thanks to Kurt Roeckx for doing the early
+    build tests and reporting the need for this.  Closes: #828480
+
+ -- Ron Lee <ron@debian.org>  Thu, 07 Jul 2016 13:08:40 +0930
+
+opusfile (0.7-1) unstable; urgency=medium
+
+  * Better overflow check for serialno allocation.
+  * Handle continued packets in bisection search.
+  * Fix timestamp check for seek-free seek.
+  * Buffer continued packet data to reduce seeking.
+  * Add support for R128_ALBUM_GAIN tag.
+  * Fix potential memory leaks with OpusServerInfo.
+
+ -- Ron Lee <ron@debian.org>  Wed, 06 Jan 2016 07:08:02 +1030
+
+opusfile (0.6-1) unstable; urgency=medium
+
+  * Fixes for comment handling.
+  * Fixes header reading for non-Opus streams.
+  * Fixes for zero size METADATA_BLOCK_PICTURE.
+
+ -- Ron Lee <ron@debian.org>  Sat, 04 Oct 2014 10:54:29 +0930
+
+opusfile (0.5-1) unstable; urgency=low
+
+  * Much new goodness, too much to list here, see git for details.
+  * Add a symbols file now that we're back on a tagged release again.
+
+ -- Ron Lee <ron@debian.org>  Sat, 11 Jan 2014 07:35:41 +1030
+
+opusfile (0.2+20130702-1) unstable; urgency=low
+
+  * Update the package dependencies too.  Closes: #707969 (again)
+
+ -- Ron Lee <ron@debian.org>  Tue, 02 Jul 2013 16:33:34 +0930
+
+opusfile (0.2+20130513-1) unstable; urgency=low
+
+  * Snapshot release for unstable.
+  * Fixes the pkg-config file to avoid overlinking.  Closes: #707969
+  * Split the URL handling into a separate library, so that linking with
+    openssl is only an issue for people who do need that functionality.
+    The main opusfile library can now be linked with anything again.
+    Closes:  #708008
+
+ -- Ron Lee <ron@debian.org>  Mon, 13 May 2013 21:43:40 +0930
+
+opusfile (0.2-1) experimental; urgency=low
+
+  * Initial release.  Closes: #692942
+
+ -- Ron Lee <ron@debian.org>  Sat, 17 Nov 2012 21:27:45 +1030
+
+opusfile (0.1-1) experimental; urgency=low
+
+  * Initial test package.
+
+ -- Ron Lee <ron@debian.org>  Sun, 11 Nov 2012 10:38:53 +1030
+
