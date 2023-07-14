@@ -1,3 +1,9 @@
+opusfile (0.9+20170913-1.1deepin) unstable; urgency=medium
+
+  * Change debian/compat level to 13
+
+ -- Chang Yang <yangchang@deepin.org>  Fri, 14 Jul 2023 15:03:22 +0800
+
 opusfile (0.9+20170913-1.1) unstable; urgency=medium
 
   * Non maintainer upload by the Reproducible Builds team.
