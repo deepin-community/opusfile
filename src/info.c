@@ -5,8 +5,8 @@
  * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
  * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
  *                                                                  *
- * THE libopusfile SOURCE CODE IS (C) COPYRIGHT 2012                *
- * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ * THE libopusfile SOURCE CODE IS (C) COPYRIGHT 2012-2020           *
+ * by the Xiph.Org Foundation and contributors https://xiph.org/    *
  *                                                                  *
  ********************************************************************/
 #ifdef HAVE_CONFIG_H
@@ -96,6 +96,9 @@ void opus_tags_clear(OpusTags *_tags){
   int ci;
   ncomments=_tags->comments;
   if(_tags->user_comments!=NULL)ncomments++;
+  else{
+    OP_ASSERT(ncomments==0);
+  }
   for(ci=ncomments;ci-->0;)_ogg_free(_tags->user_comments[ci]);
   _ogg_free(_tags->user_comments);
   _ogg_free(_tags->comment_lengths);
@@ -116,7 +119,6 @@ static int op_tags_ensure_capacity(OpusTags *_tags,size_t _ncomments){
     Trimming requires cleaning up the allocated strings in the old space, and
      is best handled separately if it's ever needed.*/
   OP_ASSERT(_ncomments>=(size_t)cur_ncomments);
-  comment_lengths=_tags->comment_lengths;
   comment_lengths=(int *)_ogg_realloc(_tags->comment_lengths,size);
   if(OP_UNLIKELY(comment_lengths==NULL))return OP_EFAULT;
   if(_tags->comment_lengths==NULL){
@@ -282,7 +284,7 @@ int opus_tags_copy(OpusTags *_dst,const OpusTags *_src){
   ret=opus_tags_copy_impl(&dst,_src);
   if(OP_UNLIKELY(ret<0))opus_tags_clear(&dst);
   else *_dst=*&dst;
-  return 0;
+  return ret;
 }
 
 int opus_tags_add(OpusTags *_tags,const char *_tag,const char *_value){
@@ -454,8 +456,7 @@ int opus_tags_get_track_gain(const OpusTags *_tags,int *_gain_q8){
 }
 
 static int op_is_jpeg(const unsigned char *_buf,size_t _buf_sz){
-  return _buf_sz>=11&&memcmp(_buf,"\xFF\xD8\xFF\xE0",4)==0
-   &&(_buf[4]<<8|_buf[5])>=16&&memcmp(_buf+6,"JFIF",5)==0;
+  return _buf_sz>=3&&memcmp(_buf,"\xFF\xD8\xFF",3)==0;
 }
 
 /*Tries to extract the width, height, bits per pixel, and palette size of a
@@ -592,6 +593,7 @@ static int opus_picture_tag_parse_impl(OpusPictureTag *_pic,const char *_tag,
   int          colors_set;
   size_t       i;
   /*Decode the BASE64 data.*/
+  OP_ASSERT(_base64_sz>=11);
   for(i=0;i<_base64_sz;i++){
     opus_uint32 value;
     int         j;

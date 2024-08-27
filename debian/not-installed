@@ -1,0 +1,4 @@
+usr/lib/${DEB_HOST_MULTIARCH}/lib*.la
+usr/share/doc/opusfile/AUTHORS
+usr/share/doc/opusfile/COPYING
+usr/share/doc/opusfile/README.md
