@@ -1,0 +1,6 @@
+Test-Command: make -C debian/tests
+Depends:
+ build-essential,
+ libopusfile-dev,
+ libssl-dev,
+ pkg-config,

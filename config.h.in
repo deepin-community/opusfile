@@ -30,8 +30,7 @@
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
 
-/* Define to the sub-directory in which libtool stores uninstalled libraries.
-   */
+/* Define to the sub-directory where libtool stores uninstalled libraries. */
 #undef LT_OBJDIR
 
 /* Disable floating-point API */
@@ -45,6 +44,9 @@
 
 /* Enable fixed-point calculation */
 #undef OP_FIXED_POINT
+
+/* Enable use of clock_gettime function */
+#undef OP_HAVE_CLOCK_GETTIME
 
 /* Enable use of lrintf function */
 #undef OP_HAVE_LRINTF
